@@ -1,7 +1,7 @@
 create schema flotaKC2 authorization uvddpmqj;
 
 create table flotaKC2.grupo_empresarial(
-id_grupo_empresarial SERIAL not null, --PK 
+id_grupo_empresarial varchar (20) not null, --PK 
 grupo_empresarial varchar(200) not null 
 );
 
@@ -10,25 +10,25 @@ add constraint grupo_empresarial_PK primary key (id_grupo_empresarial);
 
 
 insert into flotakc2.grupo_empresarial
-(grupo_empresarial)
-values ('BMW Group');
+(id_grupo_empresarial,grupo_empresarial)
+values ('GE001','BMW Group');
 insert into flotakc2.grupo_empresarial
-(grupo_empresarial)
-values ('Daimler');
+(id_grupo_empresarial,grupo_empresarial)
+values ('GE002','Daimler');
 insert into flotakc2.grupo_empresarial
-(grupo_empresarial)
-values ('FCA');
+(id_grupo_empresarial,grupo_empresarial)
+values ('GE003','FCA');
 insert into flotakc2.grupo_empresarial
-(grupo_empresarial)
-values ('Ford');
+(id_grupo_empresarial,grupo_empresarial)
+values ('GE004','Ford');
 insert into flotakc2.grupo_empresarial
-(grupo_empresarial)
-values ('WAG');
+(id_grupo_empresarial,grupo_empresarial)
+values ('GE005','WAG');
 
 
 create table flotaKC2.marca(
-id_marca SERIAL not null, --PK 
-id_grupo_empresarial int not null, --FK ->grupo_empresarial ->id_grupo_empresarial
+id_marca varchar (20) not null, --PK 
+id_grupo_empresarial varchar(20) not null, --FK ->grupo_empresarial ->id_grupo_empresarial
 marca varchar (200) not null);
 
 alter table flotaKC2.marca
@@ -38,32 +38,22 @@ alter table flotaKC2.marca
 add constraint marca_FK foreign key (id_grupo_empresarial)
 references flotaKC2.grupo_empresarial (id_grupo_empresarial);
 
-insert into flotaKC2.marca (id_grupo_empresarial, marca)
-values ('1','Toyota');
+insert into flotaKC2.marca (id_grupo_empresarial,id_marca, marca) values ('GE001', 'M01','Toyota');
+insert into flotakc2.marca (id_grupo_empresarial,id_marca,marca) values ('GE002', 'M02','mini');
+insert into flotakc2.marca (id_grupo_empresarial,id_marca,marca) values ('GE002', 'M03','rolls royce');
+insert into flotakc2.marca (id_grupo_empresarial,id_marca,marca) values ('GE002', 'M04','bmw');
+insert into flotakc2.marca (id_grupo_empresarial,id_marca,marca) values ('GE002', 'M05','maybach');
+insert into flotakc2.marca (id_grupo_empresarial,id_marca,marca) values ('GE003', 'M06','Mercedes-benz');
+insert into flotakc2.marca (id_grupo_empresarial,id_marca,marca) values ('GE003', 'M07','Smart');
+insert into flotakc2.marca (id_grupo_empresarial,id_marca,marca) values ('GE004', 'M08','Alfa Romeo');
+insert into flotakc2.marca (id_grupo_empresarial,id_marca,marca) values ('GE004', 'M09','Chrysler');
+insert into flotakc2.marca (id_grupo_empresarial,id_marca,marca) values ('GE005', 'M10','Dodge');
 
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (1,'mini');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (1,'rolls royce');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (1,'bmw');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (2,'maybach');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (2,'Mercedes-benz');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (2,'Smart');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (3,'Alfa Romeo');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (3,'Chrysler');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (3,'Dodge');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (3,'Fiat');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (3,'Jeep');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (3,'Lancia');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (3,'Maserati');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (3,'RAM');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (4,'Ford');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (4,'Volkswagen');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (5,'Audi');
-insert into flotakc2.marca (id_grupo_empresarial,marca) values (5,'Seat');
 
 
 create table flotaKC2.modelo(
-id_modelo SERIAL not null, --PK 
-id_marca int not null, --FK >marca ->id_marca
+id_modelo varchar (20) not null, --PK 
+id_marca varchar (20) not null, --FK >marca ->id_marca
 modelo varchar (200) not null
 );
 
@@ -75,20 +65,18 @@ add constraint modelo_FK foreign key (id_marca)
 references flotaKC2.marca (id_marca);
 
 
-insert into flotakc2.modelo (id_marca,modelo) values (2,'Cooper S');
-insert into flotakc2.modelo (id_marca,modelo) values (2,'Cooper SE');
-insert into flotakc2.modelo (id_marca,modelo) values (2,'Royce Cullinan');
-insert into flotakc2.modelo (id_marca,modelo) values (2,'Royce wrait');
-insert into flotakc2.modelo (id_marca,modelo) values (2,'EQ fortwo');
-insert into flotakc2.modelo (id_marca,modelo) values (3,'Punto');
-insert into flotakc2.modelo (id_marca,modelo) values (3,'Rubicon');
-insert into flotakc2.modelo (id_marca,modelo) values (3,'Renegade');
-insert into flotakc2.modelo (id_marca,modelo) values (4,'Fiesta');
-insert into flotakc2.modelo (id_marca,modelo) values (5,'Polo');
-insert into flotakc2.modelo (id_marca,modelo) values (5,'A4');
-insert into flotakc2.modelo (id_marca,modelo) values (5,'A8');
-insert into flotakc2.modelo (id_marca,modelo) values (5,'Panda');
-insert into flotakc2.modelo (id_marca,modelo) values (5,'León');
+insert into flotakc2.modelo (id_marca,id_modelo,modelo) values ('M01','MO1','Cooper S');
+insert into flotakc2.modelo (id_marca,id_modelo,modelo) values ('M01','MO2','Cooper SE');
+insert into flotakc2.modelo (id_marca,id_modelo,modelo) values ('M01','MO3','Royce Cullinan');
+insert into flotakc2.modelo (id_marca,id_modelo,modelo) values ('M01','MO4','Royce wrait');
+insert into flotakc2.modelo (id_marca,id_modelo,modelo) values ('M02','MO5','EQ fortwo');
+insert into flotakc2.modelo (id_marca,id_modelo,modelo) values ('M02','MO6','Punto');
+insert into flotakc2.modelo (id_marca,id_modelo,modelo) values ('M02','MO7','Rubicon');
+insert into flotakc2.modelo (id_marca,id_modelo,modelo) values ('M02','MO8','Renegade');
+insert into flotakc2.modelo (id_marca,id_modelo,modelo) values ('M03','MO9','Fiesta');
+insert into flotakc2.modelo (id_marca,id_modelo,modelo) values ('M04','MO10','Polo');
+insert into flotakc2.modelo (id_marca,id_modelo,modelo) values ('M05','MO11','A4');
+
 
 
 
@@ -122,8 +110,8 @@ insert into flotaKC2.color (color) values ('Azul');
 
 
 create table flotaKC2.vehiculo(
-id_vehiculo SERIAL not null, --PK 
-id_modelo int not null, --FK modelo --id_modelo
+id_vehiculo varchar (20) not null, --PK 
+id_modelo varchar(20) not null, --FK modelo --id_modelo
 id_color int not null, --FK color --id_color
 id_compania_aseguradora int not null, --FK aseguradora -- id_compania_aseguradora
 n_poliza varchar (50) not null,
@@ -147,22 +135,19 @@ alter table flotaKC2.vehiculo
 add constraint id_compania_aseguradora_FK foreign key (id_compania_aseguradora)
 references flotaKC2.aseguradora (id_compania_aseguradora);
 
-insert into flotaKC2.vehiculo (id_modelo, id_color, id_compania_aseguradora, n_poliza, matricula, total_kilometros, fecha_compra)
-values ( '1', '1', '1', 'P01454', 'ABC123', '100', '2010-01-01');
-insert into flotaKC2.vehiculo (id_modelo, id_color, id_compania_aseguradora, n_poliza, matricula, total_kilometros, fecha_compra)
-values ( '1', '1', '1', 'P01455', 'ABC124', '1000', '2004-01-01');
-insert into flotaKC2.vehiculo (id_modelo, id_color, id_compania_aseguradora, n_poliza, matricula, total_kilometros, fecha_compra)
-values ( '2', '1', '3', 'P01475', 'ABC174', '14000', '2000-01-01');
-insert into flotaKC2.vehiculo (id_modelo, id_color, id_compania_aseguradora, n_poliza, matricula, total_kilometros, fecha_compra)
-values ( '2', '2', '3', 'P01175', 'ABC174', '114000', '2002-01-01');
-insert into flotaKC2.vehiculo (id_modelo, id_color, id_compania_aseguradora, n_poliza, matricula, total_kilometros, fecha_compra)
-values ( '1', '1', '1', 'P01474', 'ABC723', '1020', '2014-01-01');
-insert into flotaKC2.vehiculo (id_modelo, id_color, id_compania_aseguradora, n_poliza, matricula, total_kilometros, fecha_compra)
-values ( '3', '1', '1', 'P010455', 'ABC1124', '111000', '2009-01-01');
-insert into flotaKC2.vehiculo (id_modelo, id_color, id_compania_aseguradora, n_poliza, matricula, total_kilometros, fecha_compra)
-values ( '2', '3', '1', 'P03475', 'AB4174', '154000', '2001-01-01');
-insert into flotaKC2.vehiculo (id_modelo, id_color, id_compania_aseguradora, n_poliza, matricula, total_kilometros, fecha_compra)
-values ( '2', '3', '3', 'P011375', 'AB3C174', '1144000', '2000-01-01');
+insert into flotaKC2.vehiculo (id_vehiculo, id_modelo, id_color, id_compania_aseguradora, n_poliza, matricula, total_kilometros, fecha_compra)
+values ('V001', 'MO1', '1', '1', 'P01454', 'ABC123', '100', '2010-01-01');
+insert into flotaKC2.vehiculo (id_vehiculo, id_modelo, id_color, id_compania_aseguradora, n_poliza, matricula, total_kilometros, fecha_compra)
+values ( 'V002','MO2', '1', '1', 'P01455', 'ABC124', '1000', '2004-01-01');
+insert into flotaKC2.vehiculo (id_vehiculo, id_modelo, id_color, id_compania_aseguradora, n_poliza, matricula, total_kilometros, fecha_compra)
+values ( 'V003','MO3', '1', '3', 'P01475', 'ABC174', '14000', '2000-01-01');
+insert into flotaKC2.vehiculo (id_vehiculo, id_modelo, id_color, id_compania_aseguradora, n_poliza, matricula, total_kilometros, fecha_compra)
+values ( 'V004','MO4', '2', '3', 'P01175', 'ABC174', '114000', '2002-01-01');
+insert into flotaKC2.vehiculo (id_vehiculo, id_modelo, id_color, id_compania_aseguradora, n_poliza, matricula, total_kilometros, fecha_compra)
+values ( 'V005','MO5', '1', '1', 'P01474', 'ABC723', '1020', '2014-01-01');
+insert into flotaKC2.vehiculo (id_vehiculo, id_modelo, id_color, id_compania_aseguradora, n_poliza, matricula, total_kilometros, fecha_compra)
+values ( 'V006','MO6', '1', '1', 'P010455', 'ABC1124', '111000', '2009-01-01');
+
 
 create table flotaKC2.moneda(
 id_moneda varchar (20) not null, --PK
@@ -181,7 +166,7 @@ values ('M02', 'USD');
 create table flotaKC2.revisiones(
 id_revision SERIAL not null, --PK 
 f_revision date not null, --PK
-id_vehiculo int not null, --PK, FK - vehiculo->id_vehiculo
+id_vehiculo varchar (20) not null, --PK, FK - vehiculo->id_vehiculo
 id_moneda varchar (200), --FK moneda->id_moneda
 importe decimal not null, 
 kilometros int not null,
@@ -200,16 +185,21 @@ add constraint moneda_FK foreign key (id_moneda)
 references flotaKC2.moneda (id_moneda);
 
 insert into flotaKC2.revisiones (f_revision, id_vehiculo, id_moneda, importe, kilometros, notas)
-values ('2000-10-01', '2', 'M01', '250', '550000', 'revision general');
+values ('2000-10-01', 'V001', 'M01', '250', '550000', 'revision general');
 
 insert into flotaKC2.revisiones (f_revision, id_vehiculo, id_moneda, importe, kilometros, notas)
-values ('2010-10-01', '2', 'M01', '150', '950000', 'revision 5 años');
+values ('2010-10-01', 'V001', 'M01', '150', '950000', 'revision 5 años');
 
 insert into flotaKC2.revisiones (f_revision, id_vehiculo, id_moneda, importe, kilometros, notas)
-values ('2020-10-01', '3', 'M01', '150', '50000', 'revision 2 años');
+values ('2020-10-01', 'V002', 'M01', '150', '50000', 'revision 2 años');
 
 insert into flotaKC2.revisiones (f_revision, id_vehiculo, id_moneda, importe, kilometros, notas)
-values ('2022-10-01', '3', 'M01', '100', '50000', 'revision 4 años');
+values ('2022-10-01', 'V002', 'M01', '100', '50000', 'revision 4 años');
 
 insert into flotaKC2.revisiones (f_revision, id_vehiculo, id_moneda, importe, kilometros, notas)
-values ('2022-10-01', '4', 'M02', '120', '10000', 'revision general');
+values ('2022-10-01', 'V003', 'M02', '120', '10000', 'revision general');
+
+
+
+
+
